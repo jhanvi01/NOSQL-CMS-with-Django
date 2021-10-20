@@ -1,0 +1,379 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<title>CLUB MEMBERSHIP SYSTEM</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- Bootstrap CSS -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Montserrat", sans-serif
+    }
+    
+    .cm-row-padding img {
+        margin-bottom: 12px
+    }
+    /* Set the width of the sidebar to 120px */
+    
+    .cm-sidebar {
+        width: 120px;
+        background: #222;
+    }
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    
+    #main {
+        margin-left: 120px
+    }
+    /* Remove margins from "page content" on small screens */
+    
+    @media only screen and (max-width: 600px) {
+        #main {
+            margin-left: 0
+        }
+    }
+</style>
+
+<body class="cm-black">
+
+    <!-- Icon Bar (Sidebar - hidden on small screens) -->
+    <nav class="cm-sidebar cm-bar-block cm-small cm-hide-small cm-center">
+        <!-- Avatar image in top left corner -->
+        <img src="{% static 'images/image.jpg' %}" style="width:100%">
+        <a href="#" class="cm-bar-item cm-button cm-padding-large cm-black">
+            <i class="fa fa-home cm-xxlarge"></i>
+            <p>HOME</p>
+        </a>
+        <a href="#about" class="cm-bar-item cm-button cm-padding-large cm-hover-black">
+            <i class="fa fa-user cm-xxlarge"></i>
+            <p>ABOUT</p>
+        </a>
+       {% if user.is_authenticated%}
+        <a href="#events" class="cm-bar-item cm-button cm-padding-large cm-hover-black">
+            <i class="fa fa-eye cm-xxlarge"></i>
+            <p>events</p>
+        </a>
+       {%if not request.user.is_superuser%}
+        <a href="#contact" class="cm-bar-item cm-button cm-padding-large cm-hover-black">
+            <i class="fa fa-envelope cm-xxlarge"></i>
+            <p>CONTACT</p>
+        </a>
+        {%endif%}
+        {%endif%}
+        {%if not user.is_authenticated%}
+        <a href="#signup" class="cm-bar-item cm-button cm-padding-large cm-hover-black">
+            <i class="fa fa-sign-in cm-xxlarge"></i>
+            <p>SIGN UP/ LOG IN </p>
+        </a>
+        {%else%}
+        <a href="logout" class="cm-bar-item cm-button cm-padding-large cm-hover-black">
+            <i class="fa fa-sign-out cm-xxlarge"></i>
+            <p>LOGOUT </p>
+        </a>
+        {%endif%}
+        
+    </nav>
+
+    <!-- Navbar on small screens (Hidden on medium and large screens) -->
+    <div class="cm-top cm-hide-large cm-hide-medium" id="myNavbar">
+        <div class="cm-bar cm-black cm-opacity cm-hover-opacity-off cm-center cm-small">
+            <a href="#" class="cm-bar-item cm-button" style="width:25% !important">HOME</a>
+            <a href="#about" class="cm-bar-item cm-button" style="width:25% !important">ABOUT</a>
+            <!-- <a href="#events" class="cm-bar-item cm-button" style="width:25% !important">events</a> -->
+            <!-- <a href="#contact" class="cm-bar-item cm-button" style="width:25% !important">CONTACT</a> -->
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="cm-padding-large" id="main">
+        <!-- Header/Home -->
+        <header class="cm-container cm-padding-32 cm-center cm-black" id="home">
+            <h1 class="cm-jumbo"><span class="cm-hide-small">CLUB MEMBERSHIP SYSTEM </span> </h1>
+            <p>CLUB MEMBERSHIP SYSTEM</p>
+            <img src="{% static 'images/image.jpg' %}" alt="boy" class="cm-image" width="992" height="1108">
+        </header>
+
+        <!-- About Section -->
+        <div class="cm-content cm-justify cm-text-grey cm-padding-64" id="about">
+            <h2 class="cm-text-light-grey">My Name</h2>
+            <hr style="width:200px" class="cm-opacity">
+            <p>Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <!-- <h3 class="cm-padding-16 cm-text-light-grey">My Skills</h3>
+            <p class="cm-wide">Photography</p>
+            <div class="cm-white"> -->
+            <div class="cm-dark-grey" style="height:28px;width:95%"></div>
+        </div>
+       
+        
+        <div class="cm-row cm-center cm-padding-16 cm-section cm-light-grey">
+            <div class="cm-quarter cm-section">
+                <span class="cm-xlarge">200</span><br> MEMBERS
+            </div>
+            <div class="cm-quarter cm-section">
+                <span class="cm-xlarge">55+</span><br> Events Done
+            </div>
+            <div class="cm-quarter cm-section">
+                <span class="cm-xlarge">89+</span><br> Happy Clients
+            </div>
+            <div class="cm-quarter cm-section">
+                <span class="cm-xlarge">150+</span><br> Meetings
+            </div>
+        </div>
+        {%if not user.is_authenticated%}
+        <!-- Grid for pricing tables -->
+        <h3 class="cm-padding-16 cm-text-light-grey">My Price</h3>
+        <div class="cm-row-padding" style="margin:0 -16px">
+            <div class="cm-half cm-margin-bottom">
+                <ul class="cm-ul cm-white cm-center cm-opacity cm-hover-opacity-off">
+                    <li class="cm-dark-grey cm-xlarge cm-padding-32">Basic Membership </li>
+                    <li class="cm-padding-16">Club insides</li>
+                    <li class="cm-padding-16">workshops</li>
+                    <li class="cm-padding-16">coupons</li>
+                    <li class="cm-padding-16">extra offers</li>
+                    <li class="cm-padding-16">
+                        <h2>$200</h2>
+                        <span class="cm-opacity">per month</span>
+                    </li>
+                    <li class="cm-light-grey cm-padding-24">
+                        <button class="cm-button cm-white cm-padding-large cm-hover-black">Sign Up</button>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="cm-half">
+                <ul class="cm-ul cm-white cm-center cm-opacity cm-hover-opacity-off">
+                    <li class="cm-dark-grey cm-xlarge cm-padding-32">Pro</li>
+                    <li class="cm-padding-16">Web Design</li>
+                    <li class="cm-padding-16">Photography</li>
+                    <li class="cm-padding-16">50GB Storage</li>
+                    <li class="cm-padding-16">Endless Support</li>
+                    <li class="cm-padding-16">
+                        <h2>$ 25</h2>
+                        <span class="cm-opacity">per month</span>
+                    </li>
+                    <li class="cm-light-grey cm-padding-24">
+                        <button class="cm-button cm-white cm-padding-large cm-hover-black">Sign Up</button>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Grid/Pricing tables -->
+        </div>
+        <!-- End photo grid -->
+    </div>
+    <!-- End Portfolio Section -->
+</div>
+{%endif%}
+
+{%if request.user.is_superuser%}
+<br><h3 class="cm-wide text-center">
+    All member details
+</h3>
+<br>
+<table class="table table-dark table-hover"> 
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    {%for user in users%}
+    <tr>
+        
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td><a href="upuser" class="btn btn-outline-secondary">Update</a>|<a href="deluser?id={{user.id}}" class="btn btn-outline-danger">Delete</a></td>
+    </tr>
+    
+    {%endfor%}
+    
+</table>    
+{%endif%}
+<br>
+{%if user.is_authenticated%}
+<h3 class="cm-wide text-center">Events </h3>
+<div class="cm-white">
+    <div class="cm-dark-grey" style="height:28px;width:80%"></div>
+</div><br>
+<!-- 1st card -->
+<div id="events" class="main cm-padding-64 cm-content cm-text-grey">
+    <div class="row">
+    {%for event in events%}
+
+        <div class="cards col-5">
+           
+        <div class="title">
+            <h3>{{event.name}}</h3>
+        </div>
+        <div class="des">
+            <p>{{event.desc}}</p><hr>
+            <p>{{event.date}}</p>
+            {%if not request.user.is_superuser%}
+            <a href="joinev?sid={{user.id}}&eid={{event.id}}" class="btn btn-outline-success">Join now!</a>
+            {%else%}
+            <!-- <button>Update</button> -->
+            <a href="updatev?id={{event.id}}" class="btn btn-outline-primary"> Update</a>
+            <a href="delev?id={{event.id}}" class="btn btn-outline-danger"> Delete</a>
+            {%endif%}
+        </div>
+    </div>
+    {%endfor%}
+</div>
+</div>
+{%if not request.user.is_superuser%}
+<h3 class="cm-wide text-center">Joined Events </h3>
+<div class="cm-white">
+    <div class="cm-dark-grey" style="height:28px;width:80%"></div>
+</div><br>
+
+{%for event in je%}
+
+        <div class="cards col-5">
+           
+        <div class="title" style="color: black;">
+            <h3>{{event.ename}}</h3>
+            <hr>
+            <p>{{event.edate}}</p>
+        </div>
+        <div class="des">
+           
+            <a href="leavev?id={{event.id}}" class="btn btn-outline-secondary">Leave</a>
+           
+        </div>
+    </div>
+    {%endfor%}
+
+
+{%endif%}
+
+
+{%if request.user.is_superuser%}    
+<a href="addev" class="btn btn-outline-primary">Add event</a>
+{%endif%}
+<!-- Card ends -->
+{%if not request.user.is_superuser%}
+<!-- Contact Section -->
+<div class="cm-padding-64 cm-content cm-text-grey" id="contact">
+    <h2 class="cm-text-light-grey">Contact Me</h2>
+    <hr style="width:200px" class="cm-opacity">
+    
+    <div class="cm-section">
+        <p><i class="fa fa-map-marker fa-fw cm-text-white cm-xxlarge cm-margin-right"></i> Mumbai, Maharashtra India</p>
+        <p><i class="fa fa-phone fa-fw cm-text-white cm-xxlarge cm-margin-right"></i> Phone: +91 151515</p>
+        <p><i class="fa fa-envelope fa-fw cm-text-white cm-xxlarge cm-margin-right"> </i> Email: jhanvip@gmail.com</p>
+    </div><br>
+    <p>Let's get in touch. Send me a message:</p>
+    
+    <form action="contact" method="POST">
+        {%csrf_token%}
+        <p><input class="cm-input cm-padding-16" type="text" placeholder="Name" required name="Name"></p>
+        <p><input class="cm-input cm-padding-16" type="text" placeholder="Subject" required name="Subject"></p>
+        <p><input class="cm-input cm-padding-16" type="text" placeholder="Message" required name="Message"></p>
+        <p>
+            <button class="cm-button cm-light-grey cm-padding-large" type="submit">
+                <i class="fa fa-paper-plane"></i> SEND MESSAGE
+            </button>
+        </p>
+    </form>
+    <!-- End Contact Section -->
+</div>
+{%endif%}
+{%endif%}
+
+
+
+    {%if not user.is_authenticated%}
+
+    <div id="signup" class="login-wrap cm-padding-64 cm-content cm-text-grey">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+                    <form action="login" method="POST">
+                        {%csrf_token%}
+                        <div class="group">
+                            <label for="user" class="label">Username</label>
+                            <input id="user" name="user" type="text" class="input">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Password</label>
+                            <input id="pass" name="pass" type="password" class="input" data-type="password">
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Sign In">
+                        </div>
+                        <div class="hr"></div>
+                    </form>
+                    
+                </div>
+                <div class="sign-up-htm">
+                    <form action="register" method="POST">
+                        {%csrf_token%}
+                        
+                    <div class="group">
+                        <label for="user" class="label">Username</label>
+                        <input id="user" name="user" type="text" class="input">
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Password</label>
+                        <input id="pass" name="pass" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                        <label for="rpass" class="label">Repeat Password</label>
+                        <input id="rpass" name="rpass" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                        <label for="email" class="label">Email Address</label>
+                        <input id="email" name="email" type="text" class="input">
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Sign Up">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <label for="tab-1">Already Member?</a>
+                    </div>
+                </form>
+                {%if messages%}
+                {%for msg in messages%}
+                {{msg}}
+                {%endfor%}
+                {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+
+    <!-- Footer -->
+    <footer class="cm-content cm-padding-64 cm-text-grey cm-xlarge">
+        <i class="fa fa-facebook-official cm-hover-opacity"></i>
+        <i class="fa fa-instagram cm-hover-opacity"></i>
+        <i class="fa fa-snapchat cm-hover-opacity"></i>
+        <i class="fa fa-pinterest-p cm-hover-opacity"></i>
+        <i class="fa fa-twitter cm-hover-opacity"></i>
+        <i class="fa fa-linkedin cm-hover-opacity"></i>
+        
+        <!-- End footer -->
+    </footer>
+
+    <!-- END PAGE CONTENT -->
+    </div>
+
+</body>
+
+</html>

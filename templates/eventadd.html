@@ -1,0 +1,115 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<title>CLUB MEMBERSHIP SYSTEM</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- Bootstrap CSS -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Montserrat", sans-serif
+    }
+    
+    .cm-row-padding img {
+        margin-bottom: 12px
+    }
+    /* Set the width of the sidebar to 120px */
+    
+    .cm-sidebar {
+        width: 120px;
+        background: #222;
+    }
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    
+    #main {
+        margin-left: 120px
+    }
+    /* Remove margins from "page content" on small screens */
+    
+    @media only screen and (max-width: 600px) {
+        #main {
+            margin-left: 0
+        }
+    }
+</style>
+
+<body class="cm-black">
+
+
+    {%if user.is_authenticated%}
+
+    <div id="signup" class="login-wrap cm-padding-64 cm-content cm-text-grey">
+        <div class="login-html">
+            <input id="tab-1" type="radio" checked name="tab" class="sign-up"><label for="tab-1" class="tab">Add Event</label>
+            <div class="login-form">
+                <div class="sign-up-htm">
+                    <form action="addev" method="POST">
+                        {%csrf_token%}
+                        
+                    <div class="group">
+                        <label for="name" class="label">Event Name</label>
+                        <input id="name" name="name" type="text" class="input">
+                    </div>
+                    <div class="group">
+                        <label for="desc" class="label">Description</label>
+                        <!-- <input id="pass" name="pass" type="password" class="input" data-type="password"> -->
+                        <textarea name="desc" id="name" cols="30" rows="10" class="input"></textarea>
+                    </div>
+                    <div class="group">
+                        <label for="edate" class="lable">Date</label>
+                        <input type="date" name="edate" class="input">
+                    </div>
+                    <!-- <div class="group">
+                        <label for="rpass" class="label">Repeat Password</label>
+                        <input id="rpass" name="rpass" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                        <label for="email" class="label">Email Address</label>
+                        <input id="email" name="email" type="text" class="input">
+                    </div> -->
+                    <div class="group">
+                        <input type="submit" class="button" value="Add Event">
+                    </div>
+                    <div class="hr"></div>
+                    
+                </form>
+            </div>
+            {%if messages%}
+            {%for msg in messages%}
+            {{msg}}
+            {%endfor%}
+            {%endif%}
+            </div>
+        </div>
+    </div>
+    {%endif%}
+
+    <!-- Footer -->
+    <footer class="cm-content cm-padding-64 cm-text-grey cm-xlarge">
+        <i class="fa fa-facebook-official cm-hover-opacity"></i>
+        <i class="fa fa-instagram cm-hover-opacity"></i>
+        <i class="fa fa-snapchat cm-hover-opacity"></i>
+        <i class="fa fa-pinterest-p cm-hover-opacity"></i>
+        <i class="fa fa-twitter cm-hover-opacity"></i>
+        <i class="fa fa-linkedin cm-hover-opacity"></i>
+        
+        <!-- End footer -->
+    </footer>
+
+    <!-- END PAGE CONTENT -->
+    </div>
+
+</body>
+
+</html>
